@@ -11,7 +11,7 @@ struct arr {
 
 struct route {
 	int routeNumber;
-	int price;
+	float price;
 	char firstStation[50]{};
 	char lastStation[50]{};
 };
@@ -30,7 +30,7 @@ void changeSymbol(std::string& str, char ch1, char ch2);
 
 void routeShow(route& r);
 
-float calculationOfTheFare(int price, int numPassenger, uint8_t procentKids);
+float calculationOfTheFare(float price, int numPassenger, uint8_t procentKids);
 
 int main() {
 	setlocale(LC_ALL, "Russian");
@@ -116,7 +116,7 @@ int main() {
 	детей проезд в два раза дешевле.
 	*/
 	
-	route r1{77, 33, "Театр \"Ироничная компания\"", "Кислотные дачи"};
+	route r1{77, 32.5, "Театр \"Ироничная компания\"", "Кислотные дачи"};
 
 	routeShow(r1);
 	std::cout << "Введите количество пассажиров -> ";
@@ -186,8 +186,8 @@ void routeShow(route& r) {
 	std::cout << "Конечная остановка маршрута: " << r.lastStation << std::endl;
 }
 
-float calculationOfTheFare(int price, int numPassenger, uint8_t procentKids) {
+float calculationOfTheFare(float price, int numPassenger, uint8_t procentKids) {
 	int numAdult = (int)(numPassenger - numPassenger * procentKids / 100.0);
 	int numKids = numPassenger - numAdult;
-	return (float)price * numAdult + (float)price/2 * numKids;
+	return price * numAdult + price/2 * numKids;
 }
